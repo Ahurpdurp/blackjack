@@ -2,6 +2,7 @@ import { Shoe } from "./shoe";
 import { Dealer, Player } from "./player";
 import { Status, Action } from "./types";
 import { RulesEngine } from "./rulesEngine";
+import { ActionEngine } from "./actionEngine";
 
 const maxTurns: number = 1;
 let wins: number = 0;
@@ -25,6 +26,8 @@ for (let i = 0; i < maxTurns; i++) {
     .forEach((player: Player) => {
       const action = RulesEngine.determineAction(player, dealer);
       console.log("actionman", action, player.hand, dealer.hand);
+      ActionEngine.implementPlayerAction(action, player, players, shoe);
+      console.log("it works?", player.hand, dealer.hand, player.outcome);
     });
   //   }
 }

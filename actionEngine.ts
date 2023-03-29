@@ -4,13 +4,13 @@ import { Shoe } from "./shoe";
 import { Action, Status } from "./types";
 
 export class ActionEngine {
-  implementPlayerAction(
+  static implementPlayerAction(
     action: Action,
     player: Player,
     players: Player[],
     shoe: Shoe
   ): void {
-    RulesEngine[action](player, shoe, players);
+    ActionEngine[action](player, shoe, players);
   }
 
   static hit(player: Player, shoe: Shoe): void {
