@@ -1,0 +1,26 @@
+{
+  "name": "blackjack",
+  "version": "1.0.0",
+  "description": "Attempting to simulate rounds of blackjack to check true house edges. Conventional knowledge says that the house edge can go anywhere from 2% to .5% depending on the variation and if the player is using basic strategy. This repo will attempt to run simulations to see if this number is accurate.",
+  "main": "index.js",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.10",
+    "typescript": "^5.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahurpdurp/blackjack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ahurpdurp/blackjack/issues"
+  },
+  "homepage": "https://github.com/Ahurpdurp/blackjack#readme"
+}
