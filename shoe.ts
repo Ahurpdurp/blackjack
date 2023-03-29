@@ -4,10 +4,16 @@ import { Card } from "./card";
 
 export class Shoe {
   cardList: Card[] = [];
+  shoeSize: number = 0;
 
   constructor(shoeSize: number = 4) {
+    this.shoeSize = shoeSize;
+    this.initializeShoe();
+  }
+
+  initializeShoe() {
     const decks: cardType[] = [];
-    for (let i = 0; i < shoeSize; i++) {
+    for (let i = 0; i < this.shoeSize; i++) {
       decks.push(...deck);
     }
 
@@ -17,7 +23,14 @@ export class Shoe {
   }
 
   dealCards(numberOfCards: number): Card[] {
-    return this.cardList.splice(0, numberOfCards);
+    const cardsToDeal: Card[] = [];
+    for (let i = 0; i < numberOfCards; i++) {
+      if (this.cardList.length === 0) {
+        this.initializeShoe();
+      }
+      cardsToDeal.push(...this.cardList.splice(0, 1));
+    }
+    return cardsToDeal;
   }
 
   shuffleCards(): void {

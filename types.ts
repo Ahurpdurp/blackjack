@@ -1,17 +1,16 @@
 export type cardType = string | number;
 
 export enum Action {
-  HIT = "HIT",
-  STAND = "STAND",
-  DOUB = "DOUB",
-  SPLIT = "SPLIT",
-  NONE = "NONE",
+  HIT = "hit",
+  STAND = "stand",
+  DOUB = "double",
+  SPLIT = "split",
+  NONE = "none",
 }
 
-export enum Result {
-  WIN = "WIN",
-  BUST = "BUST",
-  PUSH = "PUSH",
-  STILL_PLAYING = "STILL_PLAYING",
-  BLACKJACK = "BLACKJACK",
+export enum Status {
+  BUST = "bust",
+  STILL_PLAYING = "stillPlaying",
+  BLACKJACK = "blackjack",
+  STAYED = "stayed",
 }

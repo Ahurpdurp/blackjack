@@ -1,14 +1,15 @@
 import { Card } from "./card";
-import { Result } from "./types";
+import { Status } from "./types";
 
 export class Player {
   hand: Card[];
-  outcome: Result;
+  outcome: Status;
   finalValue: Number = 0;
+  doubled: boolean = false;
 
   constructor(cards: Card[]) {
     this.hand = cards;
-    this.outcome = Result.STILL_PLAYING;
+    this.outcome = Status.STILL_PLAYING;
   }
 
   addCard(card: Card): void {

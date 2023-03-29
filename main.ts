@@ -1,6 +1,6 @@
 import { Shoe } from "./shoe";
 import { Dealer, Player } from "./player";
-import { Result, Action } from "./types";
+import { Status, Action } from "./types";
 import { RulesEngine } from "./rulesEngine";
 
 const maxTurns: number = 1;
@@ -21,7 +21,7 @@ for (let i = 0; i < maxTurns; i++) {
   //     players.some((player: Player) => player.outcome === Result.STILL_PLAYING)
   //   ) {
   players
-    .filter((player: Player) => player.outcome === Result.STILL_PLAYING)
+    .filter((player: Player) => player.outcome === Status.STILL_PLAYING)
     .forEach((player: Player) => {
       const action = RulesEngine.determineAction(player, dealer);
       console.log("actionman", action, player.hand, dealer.hand);

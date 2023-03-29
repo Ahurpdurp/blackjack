@@ -2,12 +2,13 @@ import { hardTotalAction } from "./hardTotalRules";
 import { Dealer, Player } from "./player";
 import { softTotalAction } from "./softTotalRules";
 import { splitAction } from "./splitRules";
-import { Result, Action } from "./types";
+import { Status, Action } from "./types";
 
 export class RulesEngine {
+  // maybe in the future make this not static
   static blackjackCheck(player: Player): boolean {
     if (player.hand.length === 2 && player.total() === 21) {
-      player.outcome = Result.BLACKJACK;
+      player.outcome = Status.BLACKJACK;
       player.finalValue = 21;
       return true;
     }
