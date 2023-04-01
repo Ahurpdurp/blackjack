@@ -4,7 +4,6 @@ import { Status } from "./types";
 export class Player {
   hand: Card[];
   outcome: Status;
-  finalValue: Number = 0;
   doubled: boolean = false;
 
   constructor(cards: Card[]) {
@@ -12,10 +11,18 @@ export class Player {
     this.outcome = Status.STILL_PLAYING;
   }
 
+  finalValue(): number {
+    if (this.total() <= 21) {
+      return this.total();
+    } else {
+      return this.softTotal();
+    }
+  }
+
   debugHand(): string {
     return `${this.hand.map((h) => h.text).join(", ")}  Outcome: ${
       this.outcome
-    }`;
+    } Final Value: ${this.finalValue()}`;
   }
 
   addCard(card: Card): void {

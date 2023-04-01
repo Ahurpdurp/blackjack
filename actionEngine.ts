@@ -16,10 +16,8 @@ export class ActionEngine {
   static hit(player: Player, shoe: Shoe): void {
     player.addCard(shoe.dealCards(1)[0]);
     if (player.total() > 21 && player.softTotal() > 21) {
-      player.finalValue = player.softTotal();
       player.outcome = Status.BUST;
     } else if (player.total() === 21 || player.softTotal() === 21) {
-      player.finalValue = 21;
       player.outcome = Status.STAYED;
     }
   }

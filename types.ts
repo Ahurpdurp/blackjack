@@ -1,5 +1,13 @@
 export type cardType = string | number;
 
+export enum OutcomeOption {
+  DEALER = "dealer",
+  PLAYER = "player",
+  PUSH = "push",
+  // shouldn't reach this step, so this means there's a bug
+  DEBUG = "debug",
+}
+
 export enum Action {
   HIT = "hit",
   STAND = "stand",

@@ -9,7 +9,6 @@ export class RulesEngine {
   static blackjackCheck(player: Player): boolean {
     if (player.hand.length === 2 && player.total() === 21) {
       player.outcome = Status.BLACKJACK;
-      player.finalValue = 21;
       return true;
     }
     return false;
@@ -39,11 +38,21 @@ export class RulesEngine {
       (dealer.softTotal() >= 18 && dealer.softTotal() <= 21)
     ) {
       return Action.STAND;
-    } else if (dealer.total() === 17 && dealer.softTotal() === 17) {
+    }
+    // no ace, stand on 17
+    else if (dealer.total() === 17 && dealer.softTotal() === 17) {
       return Action.STAND;
-    } else if (dealer.total() === 17 && dealer.softTotal() === 7) {
+    }
+    // hit on soft 17
+    else if (dealer.total() === 17 && dealer.softTotal() === 7) {
       return Action.HIT;
-    } else if (dealer.total() <= 16 || dealer.softTotal() <= 16) {
+    }
+    // stand on hard 17 with ace in hand
+    else if (dealer.total() === 27 && dealer.softTotal() === 17) {
+      return Action.STAND;
+    }
+    // always hit if below 17
+    else if (dealer.total() <= 16 || dealer.softTotal() <= 16) {
       return Action.HIT;
     }
 
