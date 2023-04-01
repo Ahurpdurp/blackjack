@@ -12,6 +12,12 @@ export class Player {
     this.outcome = Status.STILL_PLAYING;
   }
 
+  debugHand(): string {
+    return `${this.hand.map((h) => h.text).join(", ")}  Outcome: ${
+      this.outcome
+    }`;
+  }
+
   addCard(card: Card): void {
     this.hand.push(card);
   }

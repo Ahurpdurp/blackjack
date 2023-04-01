@@ -4,7 +4,7 @@ import { Shoe } from "./shoe";
 import { Action, Status } from "./types";
 
 export class ActionEngine {
-  static implementPlayerAction(
+  static implementAction(
     action: Action,
     player: Player,
     players: Player[],

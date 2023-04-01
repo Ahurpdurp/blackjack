@@ -18,16 +18,30 @@ for (let i = 0; i < maxTurns; i++) {
 
   const dealer = new Dealer(shoe.dealCards(2));
 
-  //   while (
-  //     players.some((player: Player) => player.outcome === Result.STILL_PLAYING)
-  //   ) {
-  players
-    .filter((player: Player) => player.outcome === Status.STILL_PLAYING)
-    .forEach((player: Player) => {
-      const action = RulesEngine.determineAction(player, dealer);
-      console.log("actionman", action, player.hand, dealer.hand);
-      ActionEngine.implementPlayerAction(action, player, players, shoe);
-      console.log("it works?", player.hand, dealer.hand, player.outcome);
-    });
-  //   }
+  const dealerBlackjack = RulesEngine.blackjackCheck(dealer);
+
+  while (
+    players.some((player: Player) => player.outcome === Status.STILL_PLAYING) &&
+    !dealerBlackjack
+  ) {
+    players
+      .filter((player: Player) => player.outcome === Status.STILL_PLAYING)
+      .forEach((player: Player) => {
+        console.log("looping infinitely player...", player, dealer);
+        const action = RulesEngine.determinePlayerAction(player, dealer);
+        ActionEngine.implementAction(action, player, players, shoe);
+      });
+  }
+
+  while (dealer.outcome === Status.STILL_PLAYING && !dealerBlackjack) {
+    console.log("looping infinitely dealer...", dealer);
+    const action = RulesEngine.determineDealerAction(dealer);
+    ActionEngine.implementAction(action, dealer, players, shoe);
+  }
+
+  console.log(
+    "it works?",
+    players.map((x) => x.debugHand()),
+    dealer.debugHand()
+  );
 }
