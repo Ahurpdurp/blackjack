@@ -1,5 +1,5 @@
 import { Card } from "./card";
-import { Status } from "./types";
+import { Status } from "../util/types";
 
 export class Player {
   hand: Card[];

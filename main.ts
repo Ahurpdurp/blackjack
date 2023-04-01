@@ -1,9 +1,9 @@
-import { Shoe } from "./shoe";
-import { Dealer, Player } from "./player";
-import { Status, Action, OutcomeOption } from "./types";
-import { RulesEngine } from "./rulesEngine";
-import { ActionEngine } from "./actionEngine";
-import { WinnerEngine } from "./winnerEngine";
+import { Shoe } from "./classes/shoe";
+import { Dealer, Player } from "./classes/player";
+import { Status, Action, OutcomeOption } from "./util/types";
+import { RulesEngine } from "./engines/rulesEngine";
+import { ActionEngine } from "./engines/actionEngine";
+import { WinnerEngine } from "./engines/winnerEngine";
 
 const maxTurns: number = 10;
 let wins: number = 0;

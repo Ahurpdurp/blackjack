@@ -1,5 +1,5 @@
-import { deck } from "./constants";
-import { cardType } from "./types";
+import { deck } from "../util/constants";
+import { cardType } from "../util/types";
 import { Card } from "./card";
 
 export class Shoe {

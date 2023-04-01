@@ -1,8 +1,8 @@
-import { hardTotalAction } from "./hardTotalRules";
-import { Dealer, Player } from "./player";
-import { softTotalAction } from "./softTotalRules";
-import { splitAction } from "./splitRules";
-import { Status, Action } from "./types";
+import { hardTotalAction } from "../rules/hardTotalRules";
+import { Dealer, Player } from "../classes/player";
+import { softTotalAction } from "../rules/softTotalRules";
+import { splitAction } from "../rules/splitRules";
+import { Status, Action } from "../util/types";
 
 export class RulesEngine {
   // maybe in the future make this not static

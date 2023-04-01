@@ -1,4 +1,4 @@
-import { cardType } from "./types";
+import { cardType } from "../util/types";
 
 export class Card {
   text: cardType;

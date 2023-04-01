@@ -1,5 +1,5 @@
-import { Dealer, Player } from "./player";
-import { Action, cardType } from "./types";
+import { Dealer, Player } from "../classes/player";
+import { Action, cardType } from "../util/types";
 const { STAND, HIT, DOUB } = Action;
 const softTotalPlayerMap: { [key: number]: number } = {
   20: 0,

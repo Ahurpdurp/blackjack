@@ -1,7 +1,7 @@
-import { Player } from "./player";
+import { Player } from "../classes/player";
 import { RulesEngine } from "./rulesEngine";
-import { Shoe } from "./shoe";
-import { Action, Status } from "./types";
+import { Shoe } from "../classes/shoe";
+import { Action, Status } from "../util/types";
 
 export class ActionEngine {
   static implementAction(

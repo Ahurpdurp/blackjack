@@ -1,5 +1,5 @@
-import { Dealer, Player } from "./player";
-import { OutcomeOption, Status } from "./types";
+import { Dealer, Player } from "../classes/player";
+import { OutcomeOption, Status } from "../util/types";
 
 export class WinnerEngine {
   static determineWhoWon(
