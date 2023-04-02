@@ -1,6 +1,6 @@
 import { Shoe } from "./classes/shoe";
 import { Dealer, Player } from "./classes/player";
-import { Status, Action, OutcomeOption } from "./util/types";
+import { Status, OutcomeOption } from "./util/types";
 import { RulesEngine } from "./engines/rulesEngine";
 import { ActionEngine } from "./engines/actionEngine";
 import { WinnerEngine } from "./engines/winnerEngine";
