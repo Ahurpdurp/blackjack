@@ -5,6 +5,8 @@ export class Player {
   hand: Card[];
   outcome: Status;
   doubled: boolean = false;
+  // we only check the split the first time in the loop
+  splitChecked: boolean = false;
 
   constructor(cards: Card[]) {
     this.hand = cards;

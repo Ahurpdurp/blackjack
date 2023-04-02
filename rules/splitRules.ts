@@ -3,6 +3,9 @@ import { Action, cardType } from "../util/types";
 const { SPLIT, NONE } = Action;
 const splitPlayerMap: { [key: cardType]: number } = {
   A: 0,
+  K: 1,
+  Q: 1,
+  J: 1,
   10: 1,
   9: 2,
   8: 3,

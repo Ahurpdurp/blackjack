@@ -51,6 +51,7 @@ export function softTotalAction(player: Player, dealer: Dealer): Action {
     }
   }
 
+  console.log("wtfmansoft", player, dealer);
   return rulesMatrix[softTotalPlayerMap[total]][
     softTotalDealerMap[dealer.faceUpCard.text]
   ];

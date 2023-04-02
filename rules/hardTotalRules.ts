@@ -51,7 +51,8 @@ const rulesMatrix = [
 ];
 
 export function hardTotalAction(player: Player, dealer: Dealer): Action {
-  return rulesMatrix[hardTotalPlayerMap[player.total()]][
+  const totalToUse = player.total() > 21 ? player.softTotal() : player.total();
+  return rulesMatrix[hardTotalPlayerMap[totalToUse]][
     hardTotalDealerMap[dealer.faceUpCard.text]
   ];
 }

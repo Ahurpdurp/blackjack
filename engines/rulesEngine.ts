@@ -17,12 +17,14 @@ export class RulesEngine {
   static determinePlayerAction(player: Player, dealer: Dealer): Action {
     if (this.blackjackCheck(player)) {
       return Action.NONE;
-    } else if (player.isSplittable()) {
+    } else if (player.isSplittable() && !player.splitChecked) {
       const splitOutcome = splitAction(player, dealer);
       if (splitOutcome === Action.SPLIT) {
         return Action.SPLIT;
+      } else {
+        player.splitChecked = true;
       }
-    } else if (player.hasSoftTotal()) {
+    } else if (player.hasSoftTotal() && player.softTotal() < 11) {
       return softTotalAction(player, dealer);
     } else {
       return hardTotalAction(player, dealer);
