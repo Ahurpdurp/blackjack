@@ -5,7 +5,7 @@ import { RulesEngine } from "./engines/rulesEngine";
 import { ActionEngine } from "./engines/actionEngine";
 import { WinnerEngine } from "./engines/winnerEngine";
 
-const maxTurns: number = 10;
+const maxTurns: number = 500;
 let wins: number = 0;
 let losses: number = 0;
 let pushes: number = 0;
@@ -62,6 +62,7 @@ for (let i = 0; i < maxTurns; i++) {
       wins,
       losses,
       balance,
+      pushes,
       player.debugHand(),
       dealer.debugHand()
     );
