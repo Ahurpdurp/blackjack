@@ -67,4 +67,5 @@ for (let i = 0; i < maxTurns; i++) {
       dealer.debugHand()
     );
   });
+  turnNumber += 1;
 }
