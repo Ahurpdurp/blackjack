@@ -36,6 +36,7 @@ export class ActionEngine {
 
   static split(player: Player, shoe: Shoe, players: Player[]): void {
     const newPlayer = new Player(player.hand.splice(1, 1));
+    newPlayer.isSplit = true;
     player.addCard(shoe.dealCards(1)[0]);
     newPlayer.addCard(shoe.dealCards(1)[0]);
     players.push(newPlayer);

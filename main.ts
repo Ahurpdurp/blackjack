@@ -5,13 +5,15 @@ import { RulesEngine } from "./engines/rulesEngine";
 import { ActionEngine } from "./engines/actionEngine";
 import { WinnerEngine } from "./engines/winnerEngine";
 
-const maxTurns: number = 500;
+const maxTurns: number = 10000;
 let wins: number = 0;
 let losses: number = 0;
 let pushes: number = 0;
 let turnNumber: number = 1;
 let balance: number = 1000;
 const betSize: number = 10;
+let doubles: number = 0;
+let splits: number = 0;
 
 const shoe = new Shoe(3);
 
@@ -46,6 +48,15 @@ for (let i = 0; i < maxTurns; i++) {
     if (outcome === OutcomeOption.DEBUG) {
       console.log("alrightwtf", player.debugHand(), dealer.debugHand());
     }
+
+    if (player.doubled) {
+      doubles += 1;
+    }
+
+    if (player.isSplit) {
+      splits += 1;
+    }
+
     if (outcome === OutcomeOption.PLAYER) {
       wins += multiplier;
       balance += betSize * multiplier;
@@ -55,17 +66,21 @@ for (let i = 0; i < maxTurns; i++) {
     } else if (outcome === OutcomeOption.PUSH) {
       pushes += 1;
     }
-    console.log(
-      "outcome",
-      turnNumber,
-      outcome,
-      wins,
-      losses,
-      balance,
-      pushes,
-      player.debugHand(),
-      dealer.debugHand()
-    );
+    // console.log(
+    //   "outcome",
+    //   turnNumber,
+    //   outcome,
+    //   wins,
+    //   losses,
+    //   balance,
+    //   pushes,
+    //   player.debugHand(),
+    //   dealer.debugHand()
+    // );
   });
   turnNumber += 1;
 }
+
+console.log(
+  `final outcome: wins ${wins}, losses: ${losses}, balance: ${balance}, pushes: ${pushes}, doubles: ${doubles}, splits: ${splits}`
+);
