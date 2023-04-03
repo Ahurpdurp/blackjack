@@ -5,11 +5,14 @@ import { RulesEngine } from "./engines/rulesEngine";
 import { ActionEngine } from "./engines/actionEngine";
 import { WinnerEngine } from "./engines/winnerEngine";
 
-const maxTurns: number = 10000;
+const maxTurns: number = 100;
 let wins: number = 0;
+// doesn't account for double down being 2 and bj being 1.5
+let netWins: number = 0;
 let losses: number = 0;
+let netLosses: number = 0;
 let pushes: number = 0;
-let turnNumber: number = 1;
+let totalHands: number = 0;
 let balance: number = 1000;
 const betSize: number = 10;
 let doubles: number = 0;
@@ -59,9 +62,11 @@ for (let i = 0; i < maxTurns; i++) {
 
     if (outcome === OutcomeOption.PLAYER) {
       wins += multiplier;
+      netWins += 1;
       balance += betSize * multiplier;
     } else if (outcome === OutcomeOption.DEALER) {
       losses += multiplier;
+      netLosses += 1;
       balance -= betSize * multiplier;
     } else if (outcome === OutcomeOption.PUSH) {
       pushes += 1;
@@ -78,9 +83,22 @@ for (let i = 0; i < maxTurns; i++) {
     //   dealer.debugHand()
     // );
   });
-  turnNumber += 1;
+  totalHands += players.length;
 }
 
 console.log(
-  `final outcome: wins ${wins}, losses: ${losses}, balance: ${balance}, pushes: ${pushes}, doubles: ${doubles}, splits: ${splits}`
+  `total hands: ${totalHands}, final outcome: wins ${wins}, losses: ${losses}, balance: ${balance}, pushes: ${pushes}, doubles: ${doubles}, splits: ${splits}, win ratio: ${(
+    (wins * 100) /
+    (wins + losses)
+  ).toFixed(2)}, win ratio with pushes: ${((wins * 100) / totalHands).toFixed(
+    2
+  )}, net win ratio: ${((netWins * 100) / (netWins + netLosses)).toFixed(
+    2
+  )}, loss ratio: ${((losses * 100) / (wins + losses)).toFixed(
+    2
+  )}, net win ratio with pushes: ${((netWins * 100) / totalHands).toFixed(
+    2
+  )}, net loss ratio with pushes: ${((netLosses * 100) / totalHands).toFixed(
+    2
+  )}, push ratio: ${((pushes * 100) / totalHands).toFixed(2)}`
 );
