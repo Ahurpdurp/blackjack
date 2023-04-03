@@ -9,7 +9,7 @@ export class WinnerEngine {
   [OutcomeOption, number] {
     // dealer always wins on player bust
     if (player.outcome === Status.BUST) {
-      return [OutcomeOption.PLAYER, 1];
+      return [OutcomeOption.DEALER, 1];
     }
     // player always wins on blackjack if dealer doesn't have
     else if (
