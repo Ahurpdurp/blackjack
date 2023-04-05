@@ -4,8 +4,15 @@ import { Status, OutcomeOption } from "./util/types";
 import { RulesEngine } from "./engines/rulesEngine";
 import { ActionEngine } from "./engines/actionEngine";
 import { WinnerEngine } from "./engines/winnerEngine";
+import { BALANCE, BET_SIZE, MAX_TURNS } from "./util/constants";
+var argv = require("minimist")(process.argv.slice(2));
 
-const maxTurns: number = 100;
+const { turns, bal, betsize } = argv;
+
+const maxTurns: number = turns || MAX_TURNS;
+let balance: number = bal || BALANCE;
+const betSize: number = betsize || BET_SIZE;
+
 let wins: number = 0;
 // doesn't account for double down being 2 and bj being 1.5
 let netWins: number = 0;
@@ -13,8 +20,6 @@ let losses: number = 0;
 let netLosses: number = 0;
 let pushes: number = 0;
 let totalHands: number = 0;
-let balance: number = 1000;
-const betSize: number = 10;
 let doubles: number = 0;
 let splits: number = 0;
 
