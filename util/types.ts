@@ -14,6 +14,7 @@ export enum Action {
   DOUB = "double",
   SPLIT = "split",
   NONE = "none",
+  SURR = "surrender",
 }
 
 export enum Status {
@@ -21,4 +22,5 @@ export enum Status {
   STILL_PLAYING = "stillPlaying",
   BLACKJACK = "blackjack",
   STAYED = "stayed",
+  SURRENDERED = "surrendered",
 }

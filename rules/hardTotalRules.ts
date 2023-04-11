@@ -1,6 +1,7 @@
 import { Dealer, Player } from "../classes/player";
 import { Action, cardType } from "../util/types";
-const { STAND, HIT, DOUB } = Action;
+const { STAND, HIT, DOUB, SURR } = Action;
+
 const hardTotalPlayerMap: { [key: number]: number } = {
   21: 0,
   20: 0,
@@ -51,9 +52,29 @@ const rulesMatrix = [
   [HIT, HIT, HIT, HIT, HIT, HIT, HIT, HIT, HIT, HIT],
 ];
 
-export function hardTotalAction(player: Player, dealer: Dealer): Action {
+const rulesMatrixWithSurrender = [
+  [STAND, STAND, STAND, STAND, STAND, STAND, STAND, STAND, STAND, STAND],
+  [STAND, STAND, STAND, STAND, STAND, HIT, HIT, SURR, SURR, SURR],
+  [STAND, STAND, STAND, STAND, STAND, HIT, HIT, HIT, SURR, HIT],
+  [STAND, STAND, STAND, STAND, STAND, HIT, HIT, HIT, HIT, HIT],
+  [STAND, STAND, STAND, STAND, STAND, HIT, HIT, HIT, HIT, HIT],
+  [HIT, HIT, STAND, STAND, STAND, HIT, HIT, HIT, HIT, HIT],
+  [DOUB, DOUB, DOUB, DOUB, DOUB, DOUB, DOUB, DOUB, DOUB, DOUB],
+  [DOUB, DOUB, DOUB, DOUB, DOUB, DOUB, DOUB, DOUB, HIT, HIT],
+  [HIT, DOUB, DOUB, DOUB, DOUB, HIT, HIT, HIT, HIT, HIT],
+  [HIT, HIT, HIT, HIT, HIT, HIT, HIT, HIT, HIT, HIT],
+];
+
+export function hardTotalAction(
+  player: Player,
+  dealer: Dealer,
+  surrenderAllowed: boolean = false
+): Action {
   const totalToUse = player.total() > 21 ? player.softTotal() : player.total();
-  return rulesMatrix[hardTotalPlayerMap[totalToUse]][
+  const selectedRuleMatrix = surrenderAllowed
+    ? rulesMatrixWithSurrender
+    : rulesMatrix;
+  return selectedRuleMatrix[hardTotalPlayerMap[totalToUse]][
     hardTotalDealerMap[dealer.faceUpCard.text]
   ];
 }

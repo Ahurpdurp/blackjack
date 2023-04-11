@@ -26,6 +26,10 @@ export class ActionEngine {
     player.outcome = Status.STAYED;
   }
 
+  static surrender(player: Player): void {
+    player.outcome = Status.SURRENDERED;
+  }
+
   static double(player: Player, shoe: Shoe): void {
     player.doubled = true;
     this.hit(player, shoe);

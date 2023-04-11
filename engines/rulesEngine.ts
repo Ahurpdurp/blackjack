@@ -14,7 +14,11 @@ export class RulesEngine {
     return false;
   }
 
-  static determinePlayerAction(player: Player, dealer: Dealer): Action {
+  static determinePlayerAction(
+    player: Player,
+    dealer: Dealer,
+    surrenderAllowed: boolean = false
+  ): Action {
     if (this.blackjackCheck(player)) {
       return Action.NONE;
     } else if (player.isSplittable() && !player.splitChecked) {
@@ -27,7 +31,7 @@ export class RulesEngine {
     } else if (player.hasSoftTotal() && player.softTotal() < 11) {
       return softTotalAction(player, dealer);
     } else {
-      return hardTotalAction(player, dealer);
+      return hardTotalAction(player, dealer, surrenderAllowed);
     }
 
     return Action.NONE;

@@ -25,6 +25,12 @@ export class WinnerEngine {
     ) {
       return [OutcomeOption.DEALER, 1.5];
     }
+
+    // surrender ends and returns .5 of the hand
+    else if (player.outcome === Status.SURRENDERED) {
+      return [OutcomeOption.DEALER, 0.5];
+    }
+
     // both blackjack is push
     else if (
       player.outcome === Status.BLACKJACK &&
