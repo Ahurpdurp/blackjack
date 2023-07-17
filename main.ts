@@ -26,7 +26,7 @@ let doubles: number = 0;
 let splits: number = 0;
 let surrenders: number = 0;
 
-const shoe = new Shoe(3);
+const shoe = new Shoe(4);
 
 for (let i = 0; i < maxTurns; i++) {
   const players: Player[] = [new Player(shoe.dealCards(2))];
