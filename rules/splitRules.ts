@@ -1,6 +1,8 @@
 import { Dealer, Player } from "../classes/player";
-import { Action, cardType } from "../util/types";
+import { Action, cardType, DeviationType } from "../util/types";
 const { SPLIT, NONE } = Action;
+const { HIGHER, LOWER } = DeviationType;
+
 const splitPlayerMap: { [key: cardType]: number } = {
   A: 0,
   K: 1,
@@ -33,9 +35,21 @@ const splitDealerMap: { [key: cardType]: number } = {
   A: 9,
 };
 
-const rulesMatrix = [
+// for deviations: [true count threshold, greater or lower than this true count, action to perform if deviated, default action]
+const deviationMatrix = [
   [SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT],
-  [NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE],
+  [
+    NONE,
+    NONE,
+    [6, HIGHER, SPLIT, NONE],
+    [5, HIGHER, SPLIT, NONE],
+    [4, HIGHER, SPLIT, NONE],
+    NONE,
+    NONE,
+    NONE,
+    NONE,
+    NONE,
+  ],
   [SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, NONE, SPLIT, SPLIT, NONE, NONE],
   [SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT],
   [SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, NONE, NONE, NONE, NONE],
@@ -46,8 +60,37 @@ const rulesMatrix = [
   [SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, SPLIT, NONE, NONE, NONE, NONE],
 ];
 
-export function splitAction(player: Player, dealer: Dealer): Action {
-  return rulesMatrix[splitPlayerMap[player.hand[0].text]][
-    splitDealerMap[dealer.faceUpCard.text]
-  ];
+export function splitAction(
+  player: Player,
+  dealer: Dealer,
+  trueCount: number,
+  countingCards: boolean = false
+): Action {
+  const actionOrDeviation =
+    deviationMatrix[splitPlayerMap[player.hand[0].text]][
+      splitDealerMap[dealer.faceUpCard.text]
+    ];
+
+  if (!Array.isArray(actionOrDeviation)) {
+    return actionOrDeviation;
+  }
+
+  const [trueCountThreshold, comparison, deviationAction, defaultAction] =
+    actionOrDeviation;
+
+  if (!countingCards) {
+    return defaultAction as Action;
+  }
+
+  if (comparison === HIGHER) {
+    return trueCount >= (trueCountThreshold as number)
+      ? (deviationAction as Action)
+      : (defaultAction as Action);
+  } else if (comparison === LOWER) {
+    return trueCount <= (trueCountThreshold as number)
+      ? (deviationAction as Action)
+      : (defaultAction as Action);
+  } else {
+    return defaultAction as Action;
+  }
 }

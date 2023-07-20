@@ -17,6 +17,11 @@ export enum Action {
   SURR = "surrender",
 }
 
+export enum DeviationType {
+  HIGHER = "higher",
+  LOWER = "lower",
+}
+
 export enum Status {
   BUST = "bust",
   STILL_PLAYING = "stillPlaying",

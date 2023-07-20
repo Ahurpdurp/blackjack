@@ -17,12 +17,19 @@ export class RulesEngine {
   static determinePlayerAction(
     player: Player,
     dealer: Dealer,
-    surrenderAllowed: boolean = false
+    surrenderAllowed: boolean = false,
+    trueCount: number,
+    countingCards: boolean = false
   ): Action {
     if (this.blackjackCheck(player)) {
       return Action.NONE;
     } else if (player.isSplittable() && !player.splitChecked) {
-      const splitOutcome = splitAction(player, dealer);
+      const splitOutcome = splitAction(
+        player,
+        dealer,
+        trueCount,
+        countingCards
+      );
       if (splitOutcome === Action.SPLIT) {
         return Action.SPLIT;
       } else {

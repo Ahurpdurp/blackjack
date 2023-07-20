@@ -13,6 +13,7 @@ const maxTurns: number = turns || MAX_TURNS;
 let balance: number = bal || BALANCE;
 const betSize: number = betsize || BET_SIZE;
 const surrenderAllowed: boolean = !!surr;
+const countingCards: boolean = true;
 
 let wins: number = 0;
 // doesn't account for double down being 2 and bj being 1.5
@@ -46,7 +47,9 @@ for (let i = 0; i < maxTurns; i++) {
         const action = RulesEngine.determinePlayerAction(
           player,
           dealer,
-          surrenderAllowed
+          surrenderAllowed,
+          shoe.trueCount,
+          countingCards
         );
         ActionEngine.implementAction(action, player, players, shoe);
       });
